@@ -8,6 +8,8 @@
 import UIKit
 
 class MainView: UIView {
+    weak var delegate: MainViewOutputDelegate?
+    
     private lazy var upperStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -86,6 +88,7 @@ class MainView: UIView {
         for course in Constans().courses {
             if let courseInfo = Constans().coursesInfo[course] {
                 let courseView = CourseView(frame: .zero, name: courseInfo.courseName, color: courseInfo.color, descriptionCourse: courseInfo.description, pictureName: courseInfo.pictureName)
+                courseView.delegate = self
                 coursesStackView.addArrangedSubview(courseView)
 
             }
@@ -116,7 +119,13 @@ class MainView: UIView {
 
     }
 
+}
 
+
+extension MainView: CourseViewDelegate {
+    func stackViewTapped(courseName: String) {
+        delegate?.courseBlockTapped(courseName: courseName)
+    }
 }
 
 extension MainView {

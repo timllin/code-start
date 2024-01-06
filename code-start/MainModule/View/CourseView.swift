@@ -8,11 +8,17 @@
 import Foundation
 import UIKit
 
+protocol CourseViewDelegate: AnyObject {
+    func stackViewTapped(courseName: String)
+}
+
 class CourseView: UIView {
     let name: String
     let color: UIColor
     let descriptionCourse: String
     let pictureName: String
+
+    weak var delegate: CourseViewDelegate?
 
     init(frame: CGRect, name: String, color: UIColor, descriptionCourse: String, pictureName: String) {
         self.name = name
@@ -20,7 +26,7 @@ class CourseView: UIView {
         self.descriptionCourse = descriptionCourse
         self.pictureName = pictureName
         super.init(frame: frame)
-
+        
         configureView()
     }
 
@@ -106,13 +112,13 @@ class CourseView: UIView {
             courseStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             courseStackView.trailingAnchor.constraint(equalTo: trailingAnchor)])
 
-        courseStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(stackviewClicked)))
+        courseStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(stackViewTapped)))
     }
 
 
 
-    @objc func stackviewClicked() {
-        print(name)
+    @objc func stackViewTapped() {
+        delegate?.stackViewTapped(courseName: name)
     }
 }
 
