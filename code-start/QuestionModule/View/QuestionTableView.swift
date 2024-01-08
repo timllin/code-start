@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 class QuestionTableView: UIView {
-    weak var delegate: QuestionTableInputDelegate?
+    weak var delegate: QuestionTableOutputDelegate?
     
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .plain)
 
     private lazy var questionLabel: UILabel = {
         let label = UILabel()
@@ -42,18 +42,20 @@ class QuestionTableView: UIView {
         tableView.isPagingEnabled = true
         tableView.separatorStyle = .none
         tableView.bounces = false
-        //tableView.allowsSelection = false
-        //tableView.rowHeight = self.bounds.size.height //UIScreen.main.bounds.height
-        //tableView.estimatedRowHeight = self.bounds.size.height //UIScreen.main.bounds.height
+        tableView.contentInset = UIEdgeInsets.zero
+        //tableView.layer.borderWidth = 10
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.allowsSelection = false
+        tableView.rowHeight = UIScreen.main.bounds.height
+        tableView.estimatedRowHeight = UIScreen.main.bounds.height
         tableView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
-        //tableView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height).isActive = true
 
     }
 
     private func setupConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .white
-        layer.borderWidth = 5
         addSubview(tableView)
 
         NSLayoutConstraint.activate([
@@ -72,7 +74,8 @@ extension QuestionTableView: UITableViewDelegate & UITableViewDataSource {
         //cell.backgroundColor = .blue
 
         if let item = delegate?.configureCell(index: indexPath.row) {
-            cell.configure(item)
+            cell.configure(item, indexPath.row)
+            cell.delegate = self
         }
         return cell
     }
@@ -80,12 +83,29 @@ extension QuestionTableView: UITableViewDelegate & UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return delegate?.countQA() ?? 0
     }
+}
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.safeAreaLayoutGuide.layoutFrame.size.height
-
+extension QuestionTableView: QuestionCellDelegate {
+    public func deleteButtonTapped(row: Int) {
+        delegate?.deleteButtonTapped(row: row)
     }
 
+    public func favouriteButtonTapped(row: Int) {
+        delegate?.favouriteButtonTapped(row: row)
+    }
+    
+
+}
+
+extension QuestionTableView: QuestionTableInputDelegate {
+    public func deleteRow(row: Int) {
+        tableView.deleteRows(at: [IndexPath(row: row, section: 0)], with: .fade)
+        tableView.reloadData()
+    }
+
+    public func reconfigureRow(row: Int) {
+        tableView.reconfigureRows(at: [IndexPath(row: row, section: 0)])
+    }
 }
 
 

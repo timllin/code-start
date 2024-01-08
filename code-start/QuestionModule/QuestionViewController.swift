@@ -14,14 +14,9 @@ class QuestionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let vv = UIView(frame: .init(x: 50, y: 50, width: 50, height: 50))
-        vv.backgroundColor = .yellow
-        view.addSubview(vv)
-        view.addSubview(tableView)
-        view.layoutSubviews()
-        view.backgroundColor = .red
-        //view.backgroundColor = .yellow
+        view = tableView
         self.tableView.delegate = presenter
+        presenter.delegate = self.tableView
         self.becomeFirstResponder()
     }
 }

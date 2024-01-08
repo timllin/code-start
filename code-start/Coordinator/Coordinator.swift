@@ -36,7 +36,6 @@ final class AppCoordinator: NSObject, CoordinatorProtocol {
 
 extension AppCoordinator: MainModuleOutputDelegate {
     func courseBlockTapped(courseName: String) {
-        print("aa")
         let questionViewController = QuestionViewController()
 //        self.navigationController.definesPresentationContext = true
 //        self.navigationController.providesPresentationContextTransitionStyle = true
