@@ -26,6 +26,16 @@ final class code_startTests: XCTestCase {
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
     }
 
+    func testRegistraion() async {
+        //AuthService().loginUser()
+        await AuthService().registerUser(nickname: "123tt", email: "tt@example.com", hashedPassword: "2313")
+
+    }
+
+    func testLoginUser() async {
+        await AuthService().loginUser(username: "123tt", password: "2313")
+    }
+
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
