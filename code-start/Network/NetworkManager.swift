@@ -9,9 +9,11 @@ import Foundation
 
 class NetworkManager {
     private let session: URLSession
+    private let authentificator: Authenticator
 
-    init(session: URLSession = URLSession.shared) {
+    init(session: URLSession = URLSession.shared, authentificator: Authenticator = Authenticator.shared) {
         self.session = session
+        self.authentificator = authentificator
     }
 
     func performRequest<T>(_ request: URLRequest, decodingType: T.Type) async -> (T?, HTTPURLResponse) where T: Decodable {
@@ -27,6 +29,17 @@ class NetworkManager {
         } catch {
             print(error)
             return (nil, response)
+        }
+    }
+
+    func performAuthRequest<T>(_ request: URLRequest, decodingType: T.Type) async -> (T?, HTTPURLResponse) where T: Decodable {
+        if authentificator.isTokenExpire() {
+            var request = request
+            await authentificator.requestAccessToken(with: &request)
+            authentificator.updateRequestTokenData(request: &request)
+            return await performRequest(request, decodingType: T.self)
+        } else {
+            return await performRequest(request, decodingType: T.self)
         }
     }
 }

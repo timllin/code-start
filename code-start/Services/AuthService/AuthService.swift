@@ -28,8 +28,8 @@ class AuthService: AuthServiceProtocol {
     func loginUser(username: String, password: String) async {
         let request = AuthProvider.token(LoginDTO(username: username, password: password)).makeRequest
         let response = await networkManager.performRequest(request, decodingType: TokenDTO.self)
-        let data = response.0
-        let responseStatus = response.1
+        guard let data = response.0 else { return }
+        Authenticator.shared.updateTokens(tokensInfo: data)
     }
 }
 

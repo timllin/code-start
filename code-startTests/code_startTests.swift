@@ -27,13 +27,12 @@ final class code_startTests: XCTestCase {
     }
 
     func testRegistraion() async {
-        //AuthService().loginUser()
         await AuthService().registerUser(nickname: "123tt", email: "tt@example.com", hashedPassword: "2313")
 
     }
 
     func testLoginUser() async {
-        await AuthService().loginUser(username: "123tt", password: "2313")
+        await AuthService().loginUser(username: "Timur", password: "Siska")
     }
 
     func testPerformanceExample() throws {

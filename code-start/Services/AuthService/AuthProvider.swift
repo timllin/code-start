@@ -14,7 +14,7 @@ enum AuthProvider {
 
 extension AuthProvider: APIRequest {
     var baseURLString: String {
-        return "51.250.11.83"
+        return "178.154.204.204"
     }
 
     var apiPath: String {
