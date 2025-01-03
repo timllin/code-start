@@ -10,4 +10,7 @@ import Foundation
 protocol QuestionTableInputDelegate: AnyObject {
     func deleteRow(row: Int)
     func reconfigureRow(row: Int)
+    func reloadTable()
+    func updateProgressBar(withValue: Float)
+    func dismissQuestionList(id: Int)
 }

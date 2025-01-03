@@ -13,7 +13,7 @@ protocol APIRequest {
     var apiPath: String { get }
     var apiVersion: String? { get }
     var separatorPath: String? { get }
-    var path: String { get }
+    var path: String? { get }
     var headers: [String: String]? { get }
     var queryForCall: [URLQueryItem]? { get }
     var params: [String: Any]? { get }
@@ -39,8 +39,12 @@ extension APIRequest {
             longPath.append("/")
             longPath.append(separatorPath)
         }
-        longPath.append("/")
-        longPath.append(path)
+
+        if let path = path {
+            longPath.append("/")
+            longPath.append(path)
+        }
+
         urlComponents?.path = longPath
 
         if let queryForCalls = queryForCall {

@@ -12,17 +12,38 @@ struct QAItem {
     private let id: Int
     private let question: String
     private let answer: String
+    private var isDone: Bool
     private var isHidden: Bool
     private var isFavourite: Bool
 
-    init(id: Int, question: String, answer: String, isHidden: Bool, isFavourite: Bool) {
+
+    init(id: Int, question: String, answer: String, isDone: Bool, isHidden: Bool, isFavourite: Bool) {
         self.id = id
         self.question = question
         self.answer = answer
+        self.isDone = isDone
         self.isHidden = isHidden
         self.isFavourite = isFavourite
     }
-    
+
+    init(from question: QuestionElement) {
+        self.id = question.index
+        self.question = question.question
+        self.answer = question.answer
+        self.isDone = false
+        self.isHidden = false
+        self.isFavourite = false
+    }
+
+    init(from qaItem: QAItem) {
+        self.id = qaItem.id
+        self.question = qaItem.question
+        self.answer = qaItem.answer
+        self.isDone = qaItem.isDone
+        self.isHidden = qaItem.isHidden
+        self.isFavourite = qaItem.isFavourite
+    }
+
     public func getId() -> Int {
         return id
     }
@@ -33,6 +54,10 @@ struct QAItem {
 
     public func getAnswer() -> String {
         return answer
+    }
+
+    public func getIsDone() -> Bool {
+        return isDone
     }
 
     public func getIsHidden() -> Bool {
@@ -51,5 +76,8 @@ struct QAItem {
         self.isFavourite = state
     }
 
+    public mutating func setIsDone(state: Bool) {
+        self.isDone = state
+    }
 
 }

@@ -79,16 +79,16 @@ class CourseView: UIView {
     private lazy var image: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.heightAnchor.constraint(equalToConstant: 90).isActive = true
-        image.image = UIImage(systemName: pictureName)
+        image.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        image.image = UIImage(named: pictureName)
         image.tintColor = .gray
         image.contentMode = .scaleAspectFit
 
-        image.layer.shadowColor = UIColor.black.cgColor
-        image.layer.shadowOpacity = 5
-        image.layer.shadowOffset = .zero
-        image.layer.shadowRadius = 10
-        
+        //image.layer.shadowColor = UIColor.black.cgColor
+        //image.layer.shadowOpacity = 5
+        //image.layer.shadowOffset = .zero
+        //image.layer.shadowRadius = 10
+
         return image
     }()
 

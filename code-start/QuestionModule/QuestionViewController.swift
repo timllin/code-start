@@ -19,4 +19,8 @@ class QuestionViewController: UIViewController {
         presenter.delegate = self.tableView
         self.becomeFirstResponder()
     }
+
+    public func setupCourseName(_ courseName: String) {
+        presenter.setupCourseName(courseName)
+    }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AuthServiceProtocol: AnyObject {
-    func registerUser(nickname: String, email: String, hashedPassword: String) async throws
+    func registerUser(nickname: String, email: String, hashedPassword: String) async throws -> (UserDTO, HTTPURLResponse)
 }
 
 class AuthService: AuthServiceProtocol {
@@ -18,18 +18,21 @@ class AuthService: AuthServiceProtocol {
         self.networkManager = networkManager
     }
 
-    func registerUser(nickname: String, email: String, hashedPassword: String) async {
+    func registerUser(nickname: String, email: String, hashedPassword: String) async throws -> (UserDTO, HTTPURLResponse) {
         let request = AuthProvider.registration(RegistrationDTO(nickname: nickname, email: email, hashedPassword: hashedPassword)).makeRequest
         let response = await networkManager.performRequest(request, decodingType: UserDTO.self)
-        let data = response.0
-        let responseStatus = response.1
+        guard let data = response.0, let httpResponse = response.1 else {throw AuthServiceError.regError("Try again later") }
+        if httpResponse.statusCode == 404 {throw AuthServiceError.regError("User already exist")}
+        return (data, httpResponse)
     }
 
-    func loginUser(username: String, password: String) async {
+    func loginUser(username: String, password: String) async throws -> (TokenDTO, HTTPURLResponse) {
         let request = AuthProvider.token(LoginDTO(username: username, password: password)).makeRequest
         let response = await networkManager.performRequest(request, decodingType: TokenDTO.self)
-        guard let data = response.0 else { return }
+        guard let data = response.0, let httpResponse = response.1 else { throw AuthServiceError.loginError}
+        if httpResponse.statusCode == 404 { throw AuthServiceError.loginError}
         Authenticator.shared.updateTokens(tokensInfo: data)
+        return (data, httpResponse)
     }
 
     func refresh() async {
@@ -55,8 +58,8 @@ class AuthService: AuthServiceProtocol {
 
 extension AuthService {
     enum AuthServiceError: Error {
-        case userAlreadyExist
-        case userNotFound
+        case regError(String)
+        case loginError
     }
 }
 

@@ -11,8 +11,8 @@ struct UserDTO: Decodable {
     let nickname: String
     let email: String
     //let hashedPassword: String
-    let id: String
-    let userLevel: String
+    //let id: String
+    //let userLevel: String
     //let isPremium: Bool
     //let disabled: Bool
 
@@ -20,8 +20,8 @@ struct UserDTO: Decodable {
         case nickname
         case email
         //case hashedPassword = "hashed_password"
-        case id
-        case userLevel = "user_level"
+        //case id
+        //case userLevel = "user_level"
         //case isPremium = "is_premium"
         //case disabled
     }

@@ -17,11 +17,16 @@ enum AuthProvider {
 
 extension AuthProvider: APIRequest {
     var baseURLString: String {
-        return "84.201.133.88"
+        return "213.176.67.71"
     }
 
     var apiPath: String {
-        "auth"
+        switch self {
+        case .registration:
+            return "users"
+        default:
+            return "auth"
+        }
     }
 
     var apiVersion: String? {
@@ -30,12 +35,14 @@ extension AuthProvider: APIRequest {
 
     var separatorPath: String? {
         switch self {
-        default:
+        case .registration:
             return nil
+        default:
+            return "jwt"
         }
     }
 
-    var path: String {
+    var path: String? {
         switch self {
         case .registration:
             return "registration/"

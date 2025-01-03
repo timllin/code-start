@@ -145,9 +145,9 @@ extension MainView {
         let courses: [String] = ["python", "sql", "404"]
 
         let coursesInfo : [String: CourseItem] = [
-            "python": CourseItem(courseName: "Python 3.0", isAvailable: true, color: #colorLiteral(red: 0.8118254542, green: 0.7447302938, blue: 0.8624684215, alpha: 1), description: "bibib babababa", pictureName: "brain.head.profile"),
-            "sql" : CourseItem(courseName: "SQL", isAvailable: true, color: #colorLiteral(red: 0.9976977706, green: 0.6051780581, blue: 0.3850806355, alpha: 1), description: "bobob", pictureName: "light.ribbon.fill"),
-            "404": CourseItem(courseName: "404", isAvailable: false, color: .gray, description: "coming soon", pictureName: "circle.dashed")]
+            "python": CourseItem(courseName: "Python 3", isAvailable: true, color: #colorLiteral(red: 0.8118254542, green: 0.7447302938, blue: 0.8624684215, alpha: 1), description: "", pictureName: "python"),
+            "sql" : CourseItem(courseName: "SQL", isAvailable: true, color: #colorLiteral(red: 0.9976977706, green: 0.6051780581, blue: 0.3850806355, alpha: 1), description: "", pictureName: "sql"),
+            "404": CourseItem(courseName: "404", isAvailable: false, color: .gray, description: "coming soon", pictureName: "404")]
 
         let fontSize: CGFloat = 14
 

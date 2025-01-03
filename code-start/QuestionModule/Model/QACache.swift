@@ -11,8 +11,36 @@ final class QACache {
     private(set) var QAdict = [Int: QAItem]()
 
     init() {
-        for i in 0..<10 {
-            let item = QAItem(id: i, question: "sdasd", answer: "dasd", isHidden: false, isFavourite: false)
+        let questions = [
+            "What is your name?",
+            "What is the capital of France?",
+            "What is 2+2?",
+            "What is the color of the sky?",
+            "What is the square root of 16?"
+        ]
+
+        let answers = [
+            "My name is John.",
+            "Paris.",
+            "Four.",
+            "Blue.",
+            "Four."
+        ]
+        for i in 0...15 {
+            let randomQuestion = questions.randomElement() ?? "Default Question"
+            let randomAnswer = answers.randomElement() ?? "Default Answer"
+            let randomIsDone = false
+            let randomIsHidden = false
+            let randomIsFavourite = Bool.random()
+
+            let item = QAItem(
+                id: i,
+                question: randomQuestion,
+                answer: randomAnswer,
+                isDone: randomIsDone,
+                isHidden: randomIsHidden,
+                isFavourite: randomIsFavourite
+            )
             addItem(item: item)
         }
     }

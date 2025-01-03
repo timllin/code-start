@@ -22,7 +22,6 @@ final class AppCoordinator: NSObject, CoordinatorProtocol {
 
     func start() {
         let mainModuleBuilder = MainModuleBuilder()
-
         //let mainViewController = mainModuleBuilder.build(moduleOutput: self)
         let mainViewController = ViewController()
         mainViewController.presenter.moduleOutputDelegate = self
@@ -42,14 +41,23 @@ extension AppCoordinator: MainModuleOutputDelegate {
 
     func courseBlockTapped(courseName: String) {
         let questionViewController = QuestionViewController()
-//        self.navigationController.definesPresentationContext = true
-//        self.navigationController.providesPresentationContextTransitionStyle = true
-//        questionViewController.definesPresentationContext = true
-//        questionViewController.providesPresentationContextTransitionStyle = true
-//        questionViewController.modalPresentationStyle = .popover
+        questionViewController.presenter.coordinatorDelegate = self
+        questionViewController.setupCourseName(courseName)
         self.navigationController.pushViewController(questionViewController, animated: true)
-//        guard let vc = self.navigationController.topViewController else { return }
-//        questionViewController.modalPresentationStyle = .overFullScreen
-//       vc.present(questionViewController, animated: true)
+    }
+}
+
+protocol QuestionModuleOutputDelegate: AnyObject {
+    func backButtonTapped()
+    func progressBarTapped(destinatedVC: QuestionListViewController)
+}
+
+extension AppCoordinator: QuestionModuleOutputDelegate {
+    func backButtonTapped() {
+        self.navigationController.popViewController(animated: true)
+    }
+
+    func progressBarTapped(destinatedVC: QuestionListViewController) {
+        self.navigationController.present(destinatedVC, animated: false)
     }
 }
