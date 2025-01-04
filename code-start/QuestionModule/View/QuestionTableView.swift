@@ -156,6 +156,7 @@ class QuestionTableView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(QuestionCell.self, forCellReuseIdentifier: QuestionCell.identifier)
+        tableView.register(FooterTableViewCell.self, forCellReuseIdentifier: FooterTableViewCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.isPagingEnabled = true
         tableView.separatorStyle = .none
@@ -323,17 +324,32 @@ extension QuestionTableView {
 
 extension QuestionTableView: UITableViewDelegate & UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == (delegate?.countQA() ?? 1) - 1 {
+            return configureFooterCell(cellForRowAt: indexPath)
+        } else {
+            return configureQACells(cellForRowAt: indexPath)
+        }
+
+    }
+
+    private func configureQACells(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: QuestionCell.identifier, for: indexPath) as? QuestionCell else { fatalError() }
         if let item = delegate?.configureCell(index: indexPath.row) {
             cell.configure(item, indexPath.row)
             cell.delegate = self
         }
+
+        return cell
+    }
+
+    private func configureFooterCell(cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FooterTableViewCell.identifier, for: indexPath) as? FooterTableViewCell else { fatalError() }
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(delegate?.countQA())
-        return delegate?.countQA() ?? 0
+        return delegate?.countQA() ?? 1
     }
 
     //func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

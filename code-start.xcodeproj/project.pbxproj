@@ -51,6 +51,7 @@
 		CAA85FEF2B8B688D0021D997 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA85FEE2B8B688D0021D997 /* AuthViewController.swift */; };
 		CAA85FF22B8B68B50021D997 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA85FF12B8B68B50021D997 /* LoginView.swift */; };
 		CAA85FF62B8B89C10021D997 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA85FF52B8B89C00021D997 /* Main.storyboard */; };
+		CAAED05C2D288A1C00472E47 /* FooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAED05B2D288A1C00472E47 /* FooterTableViewCell.swift */; };
 		CAC696AD2BBC76A000729835 /* AuthBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC696AC2BBC76A000729835 /* AuthBackgroundView.swift */; };
 		CAC696B12BBCD30800729835 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC696B02BBCD30800729835 /* UIView+Extension.swift */; };
 		CAC696B32BBD94BF00729835 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC696B22BBD94BF00729835 /* LoginViewController.swift */; };
@@ -132,6 +133,7 @@
 		CAA85FEE2B8B688D0021D997 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		CAA85FF12B8B68B50021D997 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CAA85FF52B8B89C00021D997 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CAAED05B2D288A1C00472E47 /* FooterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterTableViewCell.swift; sourceTree = "<group>"; };
 		CAC696AC2BBC76A000729835 /* AuthBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBackgroundView.swift; sourceTree = "<group>"; };
 		CAC696B02BBCD30800729835 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CAC696B22BBD94BF00729835 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			children = (
 				CA9A80FC2D275FB10000FDD7 /* ProgressView+Extension.swift */,
 				CA2F70E02C1A2E8100DF956E /* QuestionCell.swift */,
+				CAAED05B2D288A1C00472E47 /* FooterTableViewCell.swift */,
 				CA2F70EA2C1A575D00DF956E /* HintView.swift */,
 				CA5BE0F92B479CDE0088BDEA /* QuestionTableView.swift */,
 			);
@@ -648,6 +651,7 @@
 				CA17CB052B293ED3004405D6 /* MainViewInputDelegate.swift in Sources */,
 				CAC696B52BBD94D400729835 /* AuthAttributes.swift in Sources */,
 				CAA85FD42B88B5E90021D997 /* HTTPMethod.swift in Sources */,
+				CAAED05C2D288A1C00472E47 /* FooterTableViewCell.swift in Sources */,
 				CA17CAF02B1EA271004405D6 /* CourseView.swift in Sources */,
 				CAFE90262B73D32E00FC9D81 /* ProfileView.swift in Sources */,
 				CAA85FF22B8B68B50021D997 /* LoginView.swift in Sources */,

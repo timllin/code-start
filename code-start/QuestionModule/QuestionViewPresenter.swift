@@ -104,6 +104,7 @@ extension QuestionViewPresenter {
                 .sorted { $0.getId() < $1.getId() }
         } else {
             self.questionToShow =  qaCache.QAdict
+                .filter { $0.value.getIsDone() == true }
                 .filter { $0.value.getIsHidden() == false }
                 .map{ $0.value }
         }
